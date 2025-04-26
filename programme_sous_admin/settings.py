@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'programme_sous_admin',  # Correction ici : Nom réel de l'app principale
+    'programmes',  # Correction ici : Nom réel de l'app principale
 ]
 
 # Middlewares
