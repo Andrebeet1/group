@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Programmes{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Tous les Programmes</h1>
+
+<div class="list-group">
+    {% for programme in programmes %}
+    <a href="{% url 'detail_programme' programme.id %}" class="list-group-item list-group-item-action">
+        {{ programme.nom }}
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
+

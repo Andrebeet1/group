@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier une Activité{% endblock %}
+
+{% block content %}
+<h1>Modifier l'Activité</h1>
+
+<form method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary mt-3">Mettre à jour</button>
+</form>
+{% endblock %}

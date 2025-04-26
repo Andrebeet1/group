@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center">Bienvenue sur la plateforme de gestion de programmes</h1>
+
+<h2>Programmes récents</h2>
+<div class="row g-3">
+    {% for programme in programmes %}
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ programme.nom }}</h5>
+                <p class="card-text">{{ programme.date_creation|date:"d M Y" }}</p>
+                <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary">Voir Détails</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

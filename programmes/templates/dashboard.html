@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>{{ programme.nom }}</h1>
+<a href="{% url 'ajouter_activite' %}" class="btn btn-success mb-3">Ajouter une activité</a>
+<h2>Liste des Activités</h2>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Jour & Date</th>
+            <th>Tutaingiliya</th>
+            <th>Mhubiri</th>
+            <th>Kiongozi</th>
+            <th>Mutangazaji</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for activite in activites %}
+        <tr>
+            <td>{{ activite.numero }}</td>
+            <td>{{ activite.jour_date }}</td>
+            <td>{{ activite.tutaingiliya }}</td>
+            <td>{{ activite.mhubiri }}</td>
+            <td>{{ activite.kiongozi }}</td>
+            <td>{{ activite.mutangazaji }}</td>
+            <td>
+                <a href="{% url 'modifier_activite' activite.id %}" class="btn btn-warning btn-sm">Modifier</a>
+                <a href="{% url 'supprimer_activite' activite.id %}" class="btn btn-danger btn-sm">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

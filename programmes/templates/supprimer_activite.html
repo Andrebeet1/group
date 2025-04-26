@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Supprimer une Activité{% endblock %}
+
+{% block content %}
+<h1>Supprimer l'Activité</h1>
+
+<p>Êtes-vous sûr de vouloir supprimer cette activité ?</p>
+
+<form method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger mt-3">Supprimer</button>
+</form>
+{% endblock %}

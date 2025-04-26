@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Détails du Programme{% endblock %}
+
+{% block content %}
+<h1>{{ programme.nom }}</h1>
+<p><strong>Admin Principal:</strong> {{ programme.sous_admin.username }}</p>
+
+<h2>Activités</h2>
+{% if activites %}
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Jour & Date</th>
+            <th>Tutaingiliya</th>
+            <th>Mhubiri</th>
+            <th>Kiongozi</th>
+            <th>Mutangazaji</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for activite in activites %}
+        <tr>
+            <td>{{ activite.numero }}</td>
+            <td>{{ activite.jour_date }}</td>
+            <td>{{ activite.tutaingiliya }}</td>
+            <td>{{ activite.mhubiri }}</td>
+            <td>{{ activite.kiongozi }}</td>
+            <td>{{ activite.mutangazaji }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">Aucune activité disponible pour ce programme.</div>
+{% endif %}
+
+<h3>Annonces</h3>
+<p>{{ programme.annonce|default:"Aucune annonce." }}</p>
+{% endblock %}
