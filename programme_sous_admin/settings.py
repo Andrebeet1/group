@@ -56,8 +56,13 @@ WSGI_APPLICATION = 'programme_sous_admin.wsgi.application'
 
 # Base de données
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'))
+    'default': dj_database_url.parse(
+        'postgresql://projet_eglise_db_user:r0vKQShenn6HN1zl4vUBPRL81AMGGSeZ@dpg-d0688j2li9vc73e3m4ng-a/projet_eglise_db',
+        conn_max_age=600,  # Garde la connexion ouverte pour de meilleures performances
+        ssl_require=True  # Render demande SSL pour la connexion
+    )
 }
+
 
 # Auth
 AUTH_PASSWORD_VALIDATORS = [
