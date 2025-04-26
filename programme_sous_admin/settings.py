@@ -8,7 +8,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1234567890@projet-tes
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']  # à restreindre en production
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 # Applications
 INSTALLED_APPS = [
@@ -51,4 +51,36 @@ TEMPLATES = [
     },
 ]
 
-WS
+# WSGI application
+WSGI_APPLICATION = 'programme_sous_admin.wsgi.application'
+
+# Base de données
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'))
+}
+
+# Auth
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+]
+
+LANGUAGE_CODE = 'fr'
+TIME_ZONE = 'Africa/Lubumbashi'
+USE_I18N = True
+USE_TZ = True
+
+STATIC_URL = '/static/'
+
+# Configurations pour les fichiers statiques sur Render avec Whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Pour Render, configurer la base de données avec PostgreSQL si nécessaire
