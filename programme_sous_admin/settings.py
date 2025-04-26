@@ -8,7 +8,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1234567890@projet-tes
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'https://macellules.onrender.com').split(',')
 
 # Applications
 INSTALLED_APPS = [
@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'programme_sous_admin',  # Correction ici : Nom réel de l'app principale
+    'programmes',  # Correction ici : Nom réel de l'app principale
 ]
 
 # Middlewares
