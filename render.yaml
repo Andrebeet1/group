@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: programme-sous-admin
+    name: macellules
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn programme_sous_admin.wsgi:application
