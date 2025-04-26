@@ -8,7 +8,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1234567890@projet-tes
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'https://macellules.onrender.com').split(',')
+ALLOWED_HOSTS = ['macellules.onrender.com', 'localhost', '127.0.0.1']
 
 # Applications
 INSTALLED_APPS = [
