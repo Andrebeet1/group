@@ -17,7 +17,9 @@
 
               {% for field in form %}
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  <label class="form-label" for="{{ field.id_for_label }}">
+                    {{ field.label|default:"" }}
+                  </label>
 
                   {% if field.field.widget.input_type == "select" or field.field.widget|default:"" == "Select" %}
                     {{ field }}
@@ -27,6 +29,7 @@
                       name="{{ field.name }}" 
                       id="{{ field.id_for_label }}" 
                       class="form-control {% if field.errors %}is-invalid{% endif %}" 
+                      placeholder="Entrez {{ field.label|lower }}" 
                       value="{{ field.value|default_if_none:'' }}">
                   {% endif %}
 
@@ -41,7 +44,9 @@
               {% endfor %}
 
               <div class="text-center pt-1 mb-3">
-                <button class="btn btn-primary btn-block fa-lg gradient-custom-2" type="submit">
+                <button 
+                  class="btn btn-primary btn-lg btn-block fa-lg gradient-custom-2 px-5 py-3" 
+                  type="submit">
                   Se connecter
                 </button>
               </div>
