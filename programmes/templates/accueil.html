@@ -3,20 +3,98 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
-<h1 class="mb-4 text-center">Karibu kwa mipango ya ma cellules ya 8é CEPAC AMANI NGUBA</h1>
+<!-- Ajouter Bootstrap Icons si ce n'est pas encore dans base.html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-<h2>Cellules zina zo pita</h2>
-<div class="row g-3">
+<style>
+    .page-title {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: underline;
+        text-decoration-color: yellow;
+        text-underline-offset: 8px;
+        margin-bottom: 40px;
+    }
+
+    .custom-card {
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .custom-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .custom-card .card-body {
+        text-align: center;
+    }
+
+    .custom-card .card-title {
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .custom-card .card-text {
+        color: #555;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+    }
+
+    .custom-card .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 20px;
+        margin-top: 10px;
+    }
+
+    .custom-card .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<h1 class="page-title">Karibu kwa mipango ya ma cellules ya 8é CEPAC AMANI NGUBA</h1>
+
+<h2 class="mb-4">Cellules zinazopita</h2>
+
+<div class="row g-4">
     {% for programme in programmes %}
     <div class="col-md-4">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm custom-card">
             <div class="card-body">
                 <h5 class="card-title">{{ programme.nom }}</h5>
-                <p class="card-text">{{ programme.date_creation|date:"d M Y" }}</p>
+
+                <p class="card-text">
+                    <i class="bi bi-calendar3"></i> <strong>Créé le:</strong> {{ programme.date_creation|date:"d M Y" }}
+                </p>
+
+                {% if programme.activite_set.all %}
+                {% with premiere_activite=programme.activite_set.first %}
+                <p class="card-text">
+                    <i class="bi bi-calendar-event"></i> <strong>Jour & Date:</strong> {{ premiere_activite.jour_date }}
+                </p>
+                <p class="card-text">
+                    <i class="bi bi-bell"></i> <strong>Tutaingiliya:</strong> {{ premiere_activite.tutaingiliya }}
+                </p>
+                {% endwith %}
+                {% else %}
+                <p class="text-muted">Aucune activité.</p>
+                {% endif %}
+
                 <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary">Voir Détails</a>
             </div>
         </div>
     </div>
+    {% empty %}
+    <p class="text-muted">Aucune cellule enregistrée pour le moment.</p>
     {% endfor %}
 </div>
 {% endblock %}
