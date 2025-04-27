@@ -49,13 +49,13 @@
 
                 <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3 mb-3">Voir Détails</a>
 
-                {% if programme.activite_set.all %}
-                    {% with premiere_activite=programme.activite_set.first %}
+                {% if activites %}
+                     {% for activite in activites %}
                         <div class="info-badge">
-                            <p><strong>Jour & Date:</strong> {{ premiere_activite.jour_date }}</p>
-                            <p><strong>Tutaingiliya:</strong> {{ premiere_activite.tutaingiliya }}</p>
+                            <p><strong>Jour & Date:</strong> {{ activite.jour_date }}</p>
+                            <p><strong>Tutaingiliya:</strong> {{ activite.tutaingiliya }}</p>
                         </div>
-                    {% endwith %}
+                    {% endfor %}
                 {% else %}
                     <div class="info-badge">
                         <p class="text-muted mb-0">Aucune activité disponible</p>
