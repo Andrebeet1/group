@@ -37,7 +37,7 @@
     <div class="col-md-4">
         <div class="card custom-card shadow-sm">
             <div class="card-body text-center">
-                {% if programme.activite_set.all %}
+                {% if programme.activite_set.exists %}
                     {% with premiere_activite=programme.activite_set.first %}
                         <h5 class="card-title">{{ premiere_activite.nom_groupe }}</h5>
                         <p class="card-text"><strong>Jour & Date :</strong> {{ premiere_activite.jour_date }}</p>
@@ -47,6 +47,7 @@
                     <h5 class="card-title">{{ programme.nom }}</h5>
                     <p class="text-muted">Aucune activité disponible</p>
                 {% endif %}
+
                 <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3">Voir Détails</a>
             </div>
         </div>
