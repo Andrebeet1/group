@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Détails du Programme{% endblock %}
+{% block title %}Détails Cellule{% endblock %}
 
 {% block content %}
 <style>
@@ -16,13 +16,18 @@
 
     /* Style pour le tableau */
     .custom-table thead {
-        background-color: #007bff; /* Bleu Bootstrap */
+        background-color: #007bff; /* Bleu */
         color: white;
     }
 
     .custom-table tbody {
-        background-color: #000; /* Noir */
-        color: white;
+        background-color: #fff; /* Blanc */
+        color: #000; /* Noir */
+    }
+
+    .custom-table td, 
+    .custom-table th {
+        border: 1px solid #ccc; /* Bordure grise */
     }
 
     /* Style pour l'annonce façon bloc de conversation */
@@ -37,14 +42,14 @@
 </style>
 
 <h1 class="grand-titre">{{ programme.nom }}</h1>
-<p><strong>Admin Principal:</strong> {{ programme.sous_admin.username }}</p>
+<p><strong>Mushimamizi:</strong> {{ programme.sous_admin.username }}</p>
 
-<h2>Activités</h2>
+<h2>Mipango</h2>
 {% if activites %}
 <table class="table table-striped table-hover custom-table">
     <thead>
         <tr>
-            <th>#</th>
+            <th>N°</th>
             <th>Jour & Date</th>
             <th>Tutaingiliya</th>
             <th>Mhubiri</th>
@@ -66,10 +71,10 @@
     </tbody>
 </table>
 {% else %}
-<div class="alert alert-info">Aucune activité disponible pour ce programme.</div>
+<div class="alert alert-info">Akuna mipango ya iyi cellule.</div>
 {% endif %}
 
-<h3>Annonces</h3>
+<h3>Tangazo</h3>
 <div class="annonce-bloc">
     {{ programme.annonce|default:"Aucune annonce." }}
 </div>
