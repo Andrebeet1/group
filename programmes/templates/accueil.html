@@ -41,27 +41,30 @@
 <h2 class="mb-4">Cellules</h2>
 
 <div class="row g-4">
-   {% for programme in programmes %}
-<div class="col-md-4">
-    <div class="card custom-card shadow-sm">
-        <div class="card-body text-center">
-            <h5 class="card-title">{{ programme.nom }}</h5>
+    {% for programme in programmes %}
+    <div class="col-md-4">
+        <div class="card custom-card shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">{{ programme.nom }}</h5>
 
-            <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3 mb-3">Voir Détails</a>
+                <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3 mb-3">Voir Détails</a>
 
-            {% if programme.activites.all %}
-                {% for activite in programme.activites.all %}
+                {% if programme.activites.all %}
+                    {% for activite in programme.activites.all %}
+                        <div class="info-badge">
+                            <p><strong>Jour & Date:</strong> {{ activite.jour_date }}</p>
+                            <p><strong>Tutaingiliya:</strong> {{ activite.tutaingiliya }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
                     <div class="info-badge">
-                        <p><strong>Jour & Date:</strong> {{ activite.jour_date }}</p>
-                        <p><strong>Tutaingiliya:</strong> {{ activite.tutaingiliya }}</p>
+                        <p class="text-muted mb-0">Aucune activité disponible</p>
                     </div>
-                {% endfor %}
-            {% else %}
-                <div class="info-badge">
-                    <p class="text-muted mb-0">Aucune activité disponible</p>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
+{% endblock %}
