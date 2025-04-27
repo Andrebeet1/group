@@ -16,19 +16,20 @@
                         {% for field in form %}
                             <div class="form-group mb-3">
                                 <label for="{{ field.id_for_label }}" class="form-label fw-bold">{{ field.label }}</label>
-                                {{ field|add_class:"form-control" }}
+                                {{ field }}  <!-- On ne touche plus au champ ici, il est déjà stylisé dans `forms.py` -->
+                                
                                 {% if field.errors %}
                                     <div class="invalid-feedback d-block">
                                         {% for error in field.errors %}
-                                            {{ error }}
+                                            <small>{{ error }}</small>
                                         {% endfor %}
                                     </div>
                                 {% endif %}
                             </div>
                         {% endfor %}
-
+                        
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg mt-3">Ajouter l'Activité</button>
+                            <button type="submit" class="btn btn-success btn-lg mt-3">Ajouter l'Activité</button>
                         </div>
                     </form>
                 </div>
