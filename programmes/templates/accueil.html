@@ -3,59 +3,66 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
-<!-- Barre de recherche -->
-<div class="search-bar mb-4">
-    <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un programme...">
-</div>
+<style>
+    .page-title {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: underline;
+        text-decoration-color: yellow;
+        text-underline-offset: 8px;
+        margin-bottom: 40px;
+    }
+    .custom-card {
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: 0.3s;
+    }
+    .custom-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .info-badge {
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 15px;
+        font-size: 14px;
+        color: #333;
+    }
+</style>
 
-<!-- Carousel des Programmes -->
-<div id="programmesCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        {% for programme in programmes %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <div class="card custom-card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{ programme.nom }}</h5>
-                        <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3 mb-3">Voir Détails</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#programmesCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Précédent</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#programmesCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Suivant</span>
-    </button>
-</div>
+<h1 class="page-title">Karibu kwa mipango ya ma cellules ya 8é CEPAC AMANI NGUBA</h1>
 
 <h2 class="mb-4">Cellules</h2>
 
-<!-- Accordion pour les Activités -->
-<div class="accordion" id="activitiesAccordion">
-    {% for activite in activites %}
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="heading{{ activite.id }}">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ activite.id }}" aria-expanded="true" aria-controls="collapse{{ activite.id }}">
-                    {{ activite.jour_date }} - {{ activite.tutaingiliya }}
-                </button>
-            </h2>
-            <div id="collapse{{ activite.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ activite.id }}" data-bs-parent="#activitiesAccordion">
-                <div class="accordion-body">
-                    <p><strong>Mhubiri:</strong> {{ activite.mhubiri }}</p>
-                    <p><strong>Kiongozi:</strong> {{ activite.kiongozi }}</p>
-                    <p><strong>Mutangazaji:</strong> {{ activite.mutangazaji }}</p>
-                </div>
+<div class="row g-4">
+    {% for programme in programmes %}
+    <div class="col-md-4">
+        <div class="card custom-card shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">{{ programme.nom }}</h5>
+
+                <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3 mb-3">Voir Détails</a>
+
+                {% if programme.activites.exists %}
+                    {% for activite in programme.activites.all %}
+                    <div class="info-badge">
+                        <p><strong>Jour & Date:</strong> {{ activite.jour_date }}</p>
+                        <p><strong>Tutaingiliya:</strong> {{ activite.tutaingiliya }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="info-badge">
+                        <p class="text-muted mb-0">Aucune activité disponible</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
-    {% endfor %}
-</div>
-
-{% endblock %}
-
     </div>
     {% endfor %}
 </div>
