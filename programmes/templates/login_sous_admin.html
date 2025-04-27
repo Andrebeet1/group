@@ -3,12 +3,54 @@
 {% block title %}Connexion Sous-Admin{% endblock %}
 
 {% block content %}
-<h1>Connexion Sous-Admin</h1>
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-6">
+        <div class="card rounded-3 text-black shadow">
+          <div class="card-body p-md-5 mx-md-4">
 
-<form method="POST" class="needs-validation" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary mt-3">Se connecter</button>
-</form>
+            <h1 class="text-center mb-4">Connexion Sous-Admin</h1>
+
+            <form method="POST" novalidate>
+              {% csrf_token %}
+              
+              <div class="form-outline mb-4">
+                <label class="form-label" for="username">Nom d'utilisateur</label>
+                <input type="text" name="username" id="username" class="form-control {% if form.username.errors %}is-invalid{% endif %}" value="{{ form.username.value|default_if_none:'' }}">
+                {% if form.username.errors %}
+                  <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                      {{ error }}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="password">Mot de passe</label>
+                <input type="password" name="password" id="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}">
+                {% if form.password.errors %}
+                  <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                      {{ error }}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="text-center pt-1 mb-3">
+                <button class="btn btn-primary btn-block fa-lg gradient-custom-2" type="submit">
+                  Se connecter
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
-
