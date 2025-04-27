@@ -49,18 +49,20 @@
 
                 <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3 mb-3">Voir Détails</a>
 
-                {% if activites %}
-                     {% for activite in activites %}
+                {% with activites_programme=programme.activite_set.all %}
+                    {% if activites_programme %}
+                        {% for activite in activites_programme %}
+                            <div class="info-badge">
+                                <p><strong>Jour & Date:</strong> {{ activite.jour_date }}</p>
+                                <p><strong>Tutaingiliya:</strong> {{ activite.tutaingiliya }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
                         <div class="info-badge">
-                            <p><strong>Jour & Date:</strong> {{ activite.jour_date }}</p>
-                            <p><strong>Tutaingiliya:</strong> {{ activite.tutaingiliya }}</p>
+                            <p class="text-muted mb-0">Aucune activité disponible</p>
                         </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="info-badge">
-                        <p class="text-muted mb-0">Aucune activité disponible</p>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                {% endwith %}
             </div>
         </div>
     </div>
