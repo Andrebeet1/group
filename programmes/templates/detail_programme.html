@@ -3,12 +3,45 @@
 {% block title %}Détails du Programme{% endblock %}
 
 {% block content %}
-<h1>{{ programme.nom }}</h1>
+<style>
+    /* Style pour le grand titre */
+    .grand-titre {
+        color: blue;
+        text-decoration: underline;
+        text-decoration-color: yellow;
+        text-underline-offset: 8px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    /* Style pour le tableau */
+    .custom-table thead {
+        background-color: #007bff; /* Bleu Bootstrap */
+        color: white;
+    }
+
+    .custom-table tbody {
+        background-color: #000; /* Noir */
+        color: white;
+    }
+
+    /* Style pour l'annonce façon bloc de conversation */
+    .annonce-bloc {
+        background-color: #f1f1f1;
+        border-radius: 15px;
+        padding: 15px;
+        margin-top: 30px;
+        max-width: 600px;
+        border: 1px solid #ccc;
+    }
+</style>
+
+<h1 class="grand-titre">{{ programme.nom }}</h1>
 <p><strong>Admin Principal:</strong> {{ programme.sous_admin.username }}</p>
 
 <h2>Activités</h2>
 {% if activites %}
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover custom-table">
     <thead>
         <tr>
             <th>#</th>
@@ -37,5 +70,7 @@
 {% endif %}
 
 <h3>Annonces</h3>
-<p>{{ programme.annonce|default:"Aucune annonce." }}</p>
+<div class="annonce-bloc">
+    {{ programme.annonce|default:"Aucune annonce." }}
+</div>
 {% endblock %}
