@@ -41,32 +41,27 @@
 <h2 class="mb-4">Cellules</h2>
 
 <div class="row g-4">
-    {% for programme in programmes %}
-    <div class="col-md-4">
-        <div class="card custom-card shadow-sm">
-            <div class="card-body text-center">
-                <h5 class="card-title">{{ programme.nom }}</h5>
+   {% for programme in programmes %}
+<div class="col-md-4">
+    <div class="card custom-card shadow-sm">
+        <div class="card-body text-center">
+            <h5 class="card-title">{{ programme.nom }}</h5>
 
-                <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3 mb-3">Voir Détails</a>
+            <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-3 mb-3">Voir Détails</a>
 
-                {% with activites_programme=programme.activite_set.all %}
-                    {% if activites_programme %}
-                        {% for activite in activites_programme %}
-                            <div class="info-badge">
-                                <p><strong>Jour & Date:</strong> {{ activite.jour_date }}</p>
-                                <p><strong>Tutaingiliya:</strong> {{ activite.tutaingiliya }}</p>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="info-badge">
-                            <p class="text-muted mb-0">Aucune activité disponible</p>
-                        </div>
-                    {% endif %}
-                {% endwith %}
-            </div>
+            {% if programme.activites.all %}
+                {% for activite in programme.activites.all %}
+                    <div class="info-badge">
+                        <p><strong>Jour & Date:</strong> {{ activite.jour_date }}</p>
+                        <p><strong>Tutaingiliya:</strong> {{ activite.tutaingiliya }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="info-badge">
+                    <p class="text-muted mb-0">Aucune activité disponible</p>
+                </div>
+            {% endif %}
         </div>
     </div>
-    {% endfor %}
 </div>
-
-{% endblock %}
+{% endfor %}
