@@ -3,7 +3,7 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
-<!-- Ajouter Bootstrap Icons si ce n'est pas encore dans base.html -->
+<!-- Bootstrap Icons (si pas encore ajoutés dans base.html) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 <style>
@@ -86,10 +86,10 @@
                 </p>
                 {% endwith %}
                 {% else %}
-                <p class="text-muted">Aucune activité.</p>
+                <p class="text-muted">Aucune activité disponible.</p>
                 {% endif %}
 
-                <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary">Voir Détails</a>
+                <a href="{% url 'detail_programme' programme.id %}" class="btn btn-primary mt-2">Voir Détails</a>
             </div>
         </div>
     </div>
