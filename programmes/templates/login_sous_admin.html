@@ -11,24 +11,28 @@
         
         <div class="mb-3">
             <label for="username" class="form-label">Nom d'utilisateur</label>
-            {{ form.username|add_class:"form-control" }}
+            {{ form.username }}
             {% if form.username.errors %}
-                <div class="invalid-feedback">
-                    {% for error in form.username.errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    <ul class="mb-0">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             {% endif %}
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label">Mot de passe</label>
-            {{ form.password|add_class:"form-control" }}
+            {{ form.password }}
             {% if form.password.errors %}
-                <div class="invalid-feedback">
-                    {% for error in form.password.errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    <ul class="mb-0">
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             {% endif %}
         </div>
