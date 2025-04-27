@@ -5,10 +5,23 @@ from .models import Programme, Activite
 from .forms import ProgrammeForm, ActiviteForm, LoginSousAdminForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 def accueil(request):
-    programmes = Programme.objects.order_by('-date_creation')[:8]
-    return render(request, 'accueil.html', {'programmes': programmes})
+    programmes = Programme.objects.all()
+    activites = Activite.objects.all()
+
+    # Filtrage des programmes en fonction de la barre de recherche
+    search_query = request.GET.get('search', '')
+    if search_query:
+        programmes = programmes.filter(nom__icontains=search_query)
+
+    context = {
+        'programmes': programmes,
+        'activites': activites,
+    }
+    return render(request, 'accueil.html', context)
+
 
 def liste_programmes(request):
     programmes = Programme.objects.all()
