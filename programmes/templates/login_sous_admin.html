@@ -3,60 +3,12 @@
 {% block title %}Connexion Sous-Admin{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Connexion Sous-Admin</h1>
+<h1>Connexion Sous-Admin</h1>
 
-    <form method="POST" class="needs-validation" novalidate>
-        {% csrf_token %}
-        
-        <div class="mb-3">
-            <label for="username" class="form-label">Nom d'utilisateur</label>
-            <input 
-                type="text" 
-                name="username" 
-                id="username" 
-                class="form-control {% if form.username.errors %}is-invalid{% endif %}" 
-                value="{{ form.username.value }}">
-            
-            {% if form.username.errors %}
-                <div class="invalid-feedback">
-                    <ul class="mb-0">
-                        {% for error in form.username.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-        </div>
-
-        <div class="mb-3">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input 
-                type="password" 
-                name="password" 
-                id="password" 
-                class="form-control {% if form.password.errors %}is-invalid{% endif %}" 
-                value="{{ form.password.value }}">
-            
-            {% if form.password.errors %}
-                <div class="invalid-feedback">
-                    <ul class="mb-0">
-                        {% for error in form.password.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100 mt-3">Se connecter</button>
-
-        <!-- Lien pour réinitialiser le mot de passe -->
-        <div class="mt-3 text-center">
-            <a href="#" class="text-muted">Mot de passe oublié ?</a>
-        </div>
-    </form>
-</div>
-
+<form method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary mt-3">Se connecter</button>
+</form>
 {% endblock %}
 
