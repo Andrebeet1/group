@@ -10,7 +10,7 @@
         <div class="card rounded-3 text-black shadow">
           <div class="card-body p-md-5 mx-md-4">
 
-            <h1 class="text-center mb-4">Connexion Sous-Admin</h1>
+            <h1 class="text-center mb-4">Connexion </h1>
 
             <form method="POST" novalidate>
               {% csrf_token %}
@@ -18,10 +18,10 @@
               {% for field in form %}
                 <div class="form-outline mb-4">
                   <label class="form-label" for="{{ field.id_for_label }}">
-                    {{ field.label|default:"" }}
+                    {{ field.label|default:"Nom du champ" }}
                   </label>
 
-                  {% if field.field.widget.input_type == "select" or field.field.widget|default:"" == "Select" %}
+                  {% if field.field.widget.input_type == "select" %}
                     {{ field }}
                   {% else %}
                     <input 
@@ -29,7 +29,7 @@
                       name="{{ field.name }}" 
                       id="{{ field.id_for_label }}" 
                       class="form-control {% if field.errors %}is-invalid{% endif %}" 
-                      placeholder="Entrez {{ field.label|lower }}" 
+                      placeholder="Votre {{ field.label|lower }}" 
                       value="{{ field.value|default_if_none:'' }}">
                   {% endif %}
 
@@ -45,9 +45,9 @@
 
               <div class="text-center pt-1 mb-3">
                 <button 
-                  class="btn btn-primary btn-lg btn-block fa-lg gradient-custom-2 px-5 py-3" 
+                  class="btn btn-gradient btn-lg btn-block px-5 py-3" 
                   type="submit">
-                  Se connecter
+                  <i class="fas fa-sign-in-alt"></i> Se connecter
                 </button>
               </div>
 
